@@ -41,13 +41,20 @@ the final mirror was compressed into a [SquashFS](https://docs.kernel.org/filesy
 mksquashfs forum.speedcube.de forum_speedcube_de_archive.sqsh -comp zstd
 ```
 
+The file can be downloaded at [forum.speedcube.de/forum_speedcube_de_archive.sqsh](https://forum.speedcube.de/forum_speedcube_de_archive.sqsh).
+
 SquashFS not only supports good compression (I used zstd in this case) but also efficient random access.
-The resulting file only measures ~13GB can then be mounted, allowing access to the individual files again.
+The resulting file only measures ~12GB can then be mounted, allowing access to the individual files again.
 This requires ad-hoc decompression of each accessed file, which is well worth it.
 
 ```sh
 mkdir /mnt/forum_speedcube_de_archive
 mount -t squashfs -o loop forum_speedcube_de_archive.sqsh /mnt/forum_speedcube_de_archive
+```
+
+This line was added to `/etc/fstab` to automatically mount the archive at boot:
+```
+/path/to/forumbackup/forum_speedcube_de_archive.sqsh /mnt/forum_speedcube_de_archive squashfs defaults 0 0
 ```
 
 The produced static files are now served via a nginx config like this:
@@ -78,6 +85,9 @@ server {
         return 301 $1.php.html;
     }
 
+    location =/forum_speedcube_de_archive.sqsh {
+        root /path/to/forumbackup/;
+    }
     location / {
         root /mnt/forum_speedcube_de_archive;
         index index.html index.php.html;
