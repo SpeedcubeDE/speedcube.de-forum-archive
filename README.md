@@ -93,8 +93,8 @@ server {
         index index.html index.php.html;
     }
 
-    # HTTP/80 works, but in reality it's HTTPS/443, auto-configured using letsencrypt's certbot
     listen 80;
+    listen [::]:80;
 }
 ```
 
