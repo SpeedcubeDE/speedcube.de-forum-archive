@@ -99,3 +99,7 @@ server {
 ```
 
 Additionally, `speedcubers.de` used to be a redirect to `forum.speedcubers.de`. For that, see [github.com/SpeedcubeDE/speedcubers-redirect](https://github.com/SpeedcubeDE/speedcubers-redirect).
+
+The whole package now lives on a Raspberry Pi Zero 2 W dangling off of a spare USB port on the back of my NAS for power, and uses a Cloudflare Tunnel to be publicly accessible.
+
+<img alt="Raspberry Pi Zero 2 W crookedly dangling off of a short up-and-then-down curling USB cable. The green power indicator light is lit. The USB cable is plugged into the back of an uGreen NAS, next to the air intake mesh." src="https://github.com/user-attachments/assets/db7ab7ab-d231-4a0e-9dc4-4693ec98026f" />
